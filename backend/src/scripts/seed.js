@@ -31,6 +31,10 @@ async function seed() {
   try {
     await sequelize.authenticate()
     console.log("Database connected.")
+    
+    // Sync DB tables
+    await sequelize.sync({ alter: true })
+    console.log("Database tables synced.")
 
     // Initialize ES index
     await initIndex()

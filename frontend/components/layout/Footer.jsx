@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-forest-600 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-forest-400 text-center sm:text-left">
-            © 2025 Asom Bazaar | Made with ❤️ in Assam, India
+            © 2026 Asom Bazaar | Made with ❤️ in Assam, India
           </p>
           <div className="flex items-center gap-4 text-[10px] font-semibold text-forest-400 uppercase tracking-wider">
             <span className="flex items-center gap-1">🔒 Razorpay Secured</span>
