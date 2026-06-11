@@ -23,10 +23,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 glass ${
         scrolled
-          ? "glass shadow-lg shadow-forest-900/5"
-          : "bg-transparent"
+          ? "shadow-lg shadow-forest-900/10 border-b border-forest-100/30"
+          : "shadow-md shadow-forest-900/2"
       }`}
     >
       <div className="max-w-7xl mx-auto flex h-[72px] items-center justify-between px-5 lg:px-8">

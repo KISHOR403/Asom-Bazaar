@@ -4,17 +4,17 @@ const artisans = [
   {
     id: 1, name: "Purnima Bora", village: "Sualkuchi, Assam",
     quote: "Weaving for 22 years. Now my work reaches Mumbai.",
-    avatar: "👩‍🌾", tilt: "-rotate-2"
+    avatar: "/images/artisan_purnima.png", tilt: "-rotate-2"
   },
   {
     id: 2, name: "Rumi Boro", village: "Barpeta, Assam",
     quote: "My bamboo lamps now light up homes across India.",
-    avatar: "👩‍🎨", tilt: "rotate-0"
+    avatar: "/images/artisan_rumi.png", tilt: "rotate-1"
   },
   {
     id: 3, name: "Mira Devi", village: "Nalbari, Assam",
     quote: "Every jonbiri pendant carries the pride of our tribe.",
-    avatar: "👩‍🏭", tilt: "rotate-2"
+    avatar: "/images/artisan_mira.png", tilt: "rotate-2"
   },
 ]
 
@@ -38,15 +38,19 @@ export default function ArtisanStories() {
           {artisans.map((artisan) => (
             <div
               key={artisan.id}
-              className={`relative bg-white rounded-2xl p-8 border border-forest-50 card-3d text-center space-y-5 ${artisan.tilt}`}
+              className={`relative bg-white rounded-3xl p-8 border border-forest-50/50 text-center space-y-6 shadow-xl shadow-forest-900/3 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-forest-900/8 ${artisan.tilt} hover:rotate-0 group`}
             >
               {/* Avatar with gold ring */}
-              <div className="mx-auto w-20 h-20 rounded-full bg-ivory flex items-center justify-center text-4xl ring-gold">
-                {artisan.avatar}
+              <div className="mx-auto w-24 h-24 rounded-full overflow-hidden border-2 border-muga shadow-md flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                <img
+                  src={artisan.avatar}
+                  alt={artisan.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <div>
-                <h3 className="font-heading text-xl font-bold text-forest">
+                <h3 className="font-heading text-xl font-bold text-forest group-hover:text-muga-700 transition-colors">
                   {artisan.name}
                 </h3>
                 <p className="text-xs text-muga font-semibold mt-1">
@@ -62,12 +66,14 @@ export default function ArtisanStories() {
                 </p>
               </div>
 
-              <Link
-                href={`/artisans/${artisan.id}`}
-                className="inline-block text-xs font-bold text-muga hover:text-muga-700 transition-colors"
-              >
-                View Her Collection →
-              </Link>
+              <div className="pt-2">
+                <Link
+                  href={`/artisans/${artisan.id}`}
+                  className="inline-block text-xs font-bold text-muga hover:text-muga-700 transition-colors"
+                >
+                  View Her Collection →
+                </Link>
+              </div>
             </div>
           ))}
         </div>
