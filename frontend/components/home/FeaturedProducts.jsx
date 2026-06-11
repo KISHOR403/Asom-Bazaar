@@ -3,10 +3,10 @@ import Link from "next/link"
 import { Star, ShoppingCart, Heart } from "lucide-react"
 
 const products = [
-  { id: 1, title: "Eri Silk Mekhela Chador", artisan: "Purnima Bora, Sualkuchi", price: 2499, oldPrice: 3200, rating: 5, reviews: 124, image: "🧣", badge: "Bestseller" },
-  { id: 2, title: "Brass Jonbiri Necklace", artisan: "Mira Devi, Nalbari", price: 1899, oldPrice: 2400, rating: 4.8, reviews: 87, image: "💍", badge: null },
-  { id: 3, title: "Handwoven Gamosa Set", artisan: "Rina Kalita, Sualkuchi", price: 699, oldPrice: 999, rating: 4.9, reviews: 203, image: "🪡", badge: "Trending" },
-  { id: 4, title: "Bamboo Lamp Shade", artisan: "Bimal Boro, Barpeta", price: 1299, oldPrice: 1800, rating: 4.7, reviews: 56, image: "🎍", badge: null },
+  { id: 1, title: "Eri Silk Mekhela Chador", artisan: "Purnima Bora, Sualkuchi", price: 2499, oldPrice: 3200, rating: 5, reviews: 124, image: "/images/eri_silk_mekhela.png", badge: "Bestseller" },
+  { id: 2, title: "Brass Jonbiri Necklace", artisan: "Mira Devi, Nalbari", price: 1899, oldPrice: 2400, rating: 4.8, reviews: 87, image: "/images/jonbiri_necklace.png", badge: null },
+  { id: 3, title: "Handwoven Gamosa Set", artisan: "Rina Kalita, Sualkuchi", price: 699, oldPrice: 999, rating: 4.9, reviews: 203, image: "/images/handwoven_gamosa.png", badge: "Trending" },
+  { id: 4, title: "Bamboo Lamp Shade", artisan: "Bimal Boro, Barpeta", price: 1299, oldPrice: 1800, rating: 4.7, reviews: 56, image: "/images/bamboo_lamp.png", badge: null },
 ]
 
 export default function FeaturedProducts() {
@@ -49,10 +49,12 @@ export default function FeaturedProducts() {
               </button>
 
               {/* Image container */}
-              <div className="img-zoom aspect-square bg-gradient-to-b from-ivory to-forest-50/20 flex items-center justify-center">
-                <span className="text-[100px] zoom-target select-none drop-shadow-sm">
-                  {prod.image}
-                </span>
+              <div className="img-zoom aspect-square overflow-hidden bg-gradient-to-b from-ivory to-forest-50/20 relative">
+                <img
+                  src={prod.image}
+                  alt={prod.title}
+                  className="w-full h-full object-cover zoom-target"
+                />
               </div>
 
               {/* Info */}
@@ -85,11 +87,11 @@ export default function FeaturedProducts() {
 
                 {/* Price */}
                 <div className="flex items-baseline gap-2">
-                  <span className="text-xl font-bold text-forest">
+                  <span className="text-2xl font-extrabold text-muga font-heading">
                     ₹{prod.price.toLocaleString("en-IN")}
                   </span>
                   {prod.oldPrice && (
-                    <span className="text-sm text-forest-300 line-through">
+                    <span className="text-sm text-forest-300 line-through font-medium">
                       ₹{prod.oldPrice.toLocaleString("en-IN")}
                     </span>
                   )}
