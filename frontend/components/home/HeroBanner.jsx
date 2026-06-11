@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import Link from "next/link"
-import { Star, ShoppingCart } from "lucide-react"
+import { Star } from "lucide-react"
 
 export default function HeroBanner() {
   return (
@@ -19,7 +19,7 @@ export default function HeroBanner() {
           </span>
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-forest">
+          <h1 className="text-6xl sm:text-7xl lg:text-[85px] font-extrabold leading-[1.05] tracking-tight text-forest font-heading">
             Wear the Soul
             <br />
             <span className="text-muga">of Assam</span>
@@ -35,11 +35,11 @@ export default function HeroBanner() {
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 h-13 px-8 py-3.5 rounded-full bg-forest text-white text-sm font-semibold shadow-lg shadow-forest/20 hover:bg-forest-600 hover:shadow-xl hover:shadow-forest/25 transition-all btn-3d"
+              className="inline-flex items-center justify-center gap-2 h-14 px-10 rounded-full bg-forest text-muga text-base font-bold shadow-lg shadow-forest/25 hover:bg-forest-600 hover:text-muga-300 hover:shadow-xl hover:shadow-forest/35 transition-all btn-3d"
             >
-              Shop Now <span className="text-base">→</span>
+              Shop Now <span className="text-lg">→</span>
             </Link>
-            <button className="inline-flex items-center gap-2 h-13 px-8 py-3.5 rounded-full border-2 border-forest-200 text-forest text-sm font-semibold hover:bg-forest-50 transition-colors">
+            <button className="inline-flex items-center justify-center gap-2 h-14 px-10 rounded-full border-2 border-forest text-forest text-base font-semibold hover:bg-forest hover:text-white transition-all">
               Watch Our Story <span className="text-base">▶</span>
             </button>
           </div>
@@ -64,16 +64,20 @@ export default function HeroBanner() {
 
           {/* Product card with depth */}
           <div className="relative animate-float">
-            <div className="w-72 h-96 sm:w-80 sm:h-[440px] lg:w-[360px] lg:h-[480px] rounded-3xl bg-gradient-to-b from-ivory to-white border border-muga-100/50 shadow-2xl shadow-forest-900/8 overflow-hidden flex flex-col items-center justify-center">
-              <span className="text-[140px] sm:text-[160px] lg:text-[180px] drop-shadow-lg select-none">🧣</span>
-              <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-white via-white/90 to-transparent">
+            <div className="w-72 h-96 sm:w-80 sm:h-[440px] lg:w-[360px] lg:h-[480px] rounded-3xl bg-gradient-to-b from-ivory to-white border border-muga-100/50 shadow-2xl shadow-forest-900/8 overflow-hidden flex flex-col relative group">
+              <img
+                src="/images/muga_silk_scarf.png"
+                alt="Muga Silk Mekhela"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white/95 to-transparent">
                 <p className="text-xs font-semibold text-muga tracking-wider uppercase">Featured</p>
-                <p className="font-heading text-lg font-bold text-forest mt-1">Muga Silk Mekhela</p>
+                <p className="font-heading text-xl font-bold text-forest mt-1">Muga Silk Mekhela</p>
                 <p className="text-sm text-forest-400">Handwoven in Sualkuchi</p>
               </div>
             </div>
             {/* Floating accent badge */}
-            <div className="absolute -top-4 -right-4 bg-muga text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse-gold">
+            <div className="absolute -top-4 -right-4 bg-muga text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse-gold z-10">
               Bestseller
             </div>
           </div>
