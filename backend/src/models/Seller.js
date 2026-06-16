@@ -25,6 +25,26 @@ const Seller = sequelize.define("Seller", {
   bio: {
     type: DataTypes.TEXT
   },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  crafts: {
+    type: DataTypes.JSON,
+    allowNull: true
+  },
+  aadhaarNumber: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  bankAccount: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  ifscCode: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   status: {
     type: DataTypes.ENUM("pending", "verified", "rejected"),
     defaultValue: "pending"

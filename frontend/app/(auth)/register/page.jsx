@@ -2,68 +2,48 @@
 import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import useAuth from "../../../hooks/useAuth"
 import styles from "./register.module.css"
 
-const ASSAM_DISTRICTS = [
-  "Baksa", "Barpeta", "Biswanath", "Bongaigaon", "Cachar", "Charaideo",
-  "Chirang", "Darrang", "Dhemaji", "Dhubri", "Dibrugarh", "Dima Hasao",
-  "Goalpara", "Golaghat", "Hailakandi", "Hojai", "Jorhat", "Kamrup",
-  "Kamrup Metropolitan", "Karbi Anglong", "Karimganj", "Kokrajhar",
-  "Lakhimpur", "Majuli", "Morigaon", "Nagaon", "Nalbari", "Sivasagar",
-  "Sonitpur", "South Salmara-Mankachar", "Tinsukia", "Udalguri",
-  "West Karbi Anglong"
-]
-
-const CRAFT_CATEGORIES = [
-  { id: "silk", label: "Silk & Sarees" },
-  { id: "jewellery", label: "Jewellery" },
-  { id: "bamboo", label: "Bamboo Crafts" },
-  { id: "spices", label: "Spices & Tea" },
-  { id: "other", label: "Other" },
-]
-
 export default function RegisterPage() {
+  const router = useRouter()
+  const { register } = useAuth()
   const [formData, setFormData] = React.useState({
     fullName: "",
     phone: "",
     email: "",
     password: "",
     confirmPassword: "",
-    role: "buyer",
-    // Seller-specific
-    shopName: "",
-    district: "",
-    crafts: [],
   })
 
   const [showPassword, setShowPassword] = React.useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const isSeller = formData.role === "seller"
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleCraftToggle = (craftId) => {
-    setFormData((prev) => ({
-      ...prev,
-      crafts: prev.crafts.includes(craftId)
-        ? prev.crafts.filter((c) => c !== craftId)
-        : [...prev.crafts, craftId],
-    }))
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!")
       return
     }
     setIsLoading(true)
-    console.log("Registration submitted", formData)
-    setTimeout(() => setIsLoading(false), 1500)
+    const res = await register({
+      name: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+      role: "buyer",
+    })
+    setIsLoading(false)
+    if (res.success) {
+      router.push("/")
+    } else {
+      alert(res.message || "Registration failed")
+    }
   }
 
   return (
@@ -150,25 +130,7 @@ export default function RegisterPage() {
           </div>
 
           <h2 className={styles.cardTitle}>Create an Account</h2>
-          <p className={styles.cardSubtitle}>Sign up to shop or sell traditional Assamese crafts</p>
-
-          {/* Progress Indicator */}
-          <div className={styles.progressBar}>
-            <div className={styles.progressStep}>
-              <div className={`${styles.progressDot} ${styles.active}`} />
-              <span className={`${styles.progressLabel} ${styles.active}`}>Basic Info</span>
-            </div>
-            <div className={styles.progressLine} />
-            <div className={styles.progressStep}>
-              <div className={styles.progressDot} />
-              <span className={styles.progressLabel}>Verify</span>
-            </div>
-            <div className={styles.progressLine} />
-            <div className={styles.progressStep}>
-              <div className={styles.progressDot} />
-              <span className={styles.progressLabel}>Done</span>
-            </div>
-          </div>
+          <p className={styles.cardSubtitle}>Sign up to shop traditional Assamese crafts</p>
 
           {/* Form */}
           <form onSubmit={handleSubmit}>
@@ -286,106 +248,6 @@ export default function RegisterPage() {
                 >
                   {showConfirmPassword ? "🙈" : "👁️"}
                 </button>
-              </div>
-            </div>
-
-            {/* Buyer / Seller Toggle */}
-            <div className={styles.fieldGroup}>
-              <label className={styles.fieldLabel}>I want to join as</label>
-              <div className={styles.roleToggle}>
-                <button
-                  type="button"
-                  className={`${styles.roleOption} ${formData.role === "buyer" ? styles.activeRole : ""}`}
-                  onClick={() => setFormData({ ...formData, role: "buyer" })}
-                  id="role-buyer-btn"
-                >
-                  <span className={styles.roleIcon}>🛍️</span>
-                  <span className={styles.roleLabel}>
-                    <span className={styles.roleName}>Buyer</span>
-                    <span className={styles.roleDesc}>Shop crafts</span>
-                  </span>
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.roleOption} ${formData.role === "seller" ? styles.activeRole : ""}`}
-                  onClick={() => setFormData({ ...formData, role: "seller" })}
-                  id="role-seller-btn"
-                >
-                  <span className={styles.roleIcon}>👩‍🎨</span>
-                  <span className={styles.roleLabel}>
-                    <span className={styles.roleName}>Seller</span>
-                    <span className={styles.roleDesc}>Sell crafts</span>
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            {/* ── Seller Extra Fields (animated slide-in) ── */}
-            <div className={`${styles.sellerFields} ${isSeller ? styles.visible : ""}`}>
-              <div className={styles.sellerFieldsInner}>
-                <div className={styles.sellerFieldsTitle}>
-                  ✦ Artisan Details
-                </div>
-
-                {/* Shop Name */}
-                <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel} htmlFor="reg-shopname">
-                    Shop Name
-                  </label>
-                  <input
-                    id="reg-shopname"
-                    className={styles.input}
-                    name="shopName"
-                    type="text"
-                    placeholder="e.g. Muga Silk House"
-                    value={formData.shopName}
-                    onChange={handleChange}
-                    disabled={!isSeller}
-                  />
-                </div>
-
-                {/* District Dropdown */}
-                <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel} htmlFor="reg-district">
-                    Location / District
-                  </label>
-                  <select
-                    id="reg-district"
-                    className={styles.select}
-                    name="district"
-                    value={formData.district}
-                    onChange={handleChange}
-                    disabled={!isSeller}
-                  >
-                    <option value="">Select your district</option>
-                    {ASSAM_DISTRICTS.map((d) => (
-                      <option key={d} value={d}>{d}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Craft Categories */}
-                <div className={styles.fieldGroup}>
-                  <label className={styles.fieldLabel}>What do you make?</label>
-                  <div className={styles.checkboxGrid}>
-                    {CRAFT_CATEGORIES.map((cat) => (
-                      <label
-                        key={cat.id}
-                        className={`${styles.checkboxLabel} ${
-                          formData.crafts.includes(cat.id) ? styles.checked : ""
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={formData.crafts.includes(cat.id)}
-                          onChange={() => handleCraftToggle(cat.id)}
-                          disabled={!isSeller}
-                        />
-                        {cat.label}
-                      </label>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
 

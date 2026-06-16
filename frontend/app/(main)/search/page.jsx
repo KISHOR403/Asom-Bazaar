@@ -6,7 +6,7 @@ import ProductGrid from "../../../components/product/ProductGrid"
 import FilterSidebar from "../../../components/search/FilterSidebar"
 import SortDropdown from "../../../components/search/SortDropdown"
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
@@ -117,3 +117,12 @@ export default function SearchPage() {
     </div>
   )
 }
+
+export default function SearchPage() {
+  return (
+    <React.Suspense fallback={<div className="min-h-screen pt-24 text-center text-forest font-semibold">Loading search results...</div>}>
+      <SearchPageContent />
+    </React.Suspense>
+  )
+}
+

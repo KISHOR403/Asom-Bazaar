@@ -2,7 +2,7 @@ const { Seller, Product } = require("../models")
 
 const registerSeller = async (req, res, next) => {
   try {
-    const { shopName, clusterLocation, experience, bio } = req.body
+    const { shopName, clusterLocation, district, experience, bio, phone, crafts, aadhaarNumber, bankAccount, ifscCode } = req.body
 
     const existingSeller = await Seller.findOne({ where: { userId: req.user.id } })
     if (existingSeller) {
@@ -12,14 +12,28 @@ const registerSeller = async (req, res, next) => {
     const seller = await Seller.create({
       userId: req.user.id,
       shopName,
-      clusterLocation,
+      clusterLocation: clusterLocation || district || "Assam",
       experience,
-      bio
+      bio,
+      phone,
+      crafts,
+      aadhaarNumber,
+      bankAccount,
+      ifscCode
     })
+
+    // Update the parent user's role to 'seller'
+    await req.user.update({ role: "seller" })
 
     return res.status(201).json({
       message: "Seller registered successfully. Awaiting verification.",
-      seller
+      seller,
+      user: {
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email,
+        role: "seller"
+      }
     })
   } catch (err) {
     next(err)
