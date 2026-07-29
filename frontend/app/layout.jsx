@@ -1,5 +1,6 @@
 import { Inter, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
+import SmoothScrollObserver from '../components/common/SmoothScrollObserver';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="bg-white text-slate-900 antialiased min-h-screen flex flex-col font-sans">
-        {children}
+        <SmoothScrollObserver>
+          {children}
+        </SmoothScrollObserver>
       </body>
     </html>
   );

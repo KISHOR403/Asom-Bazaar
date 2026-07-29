@@ -23,7 +23,7 @@ export default function CategoryGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 stagger-grid">
           {categories.map((cat) => (
             <Link
               key={cat.slug}
