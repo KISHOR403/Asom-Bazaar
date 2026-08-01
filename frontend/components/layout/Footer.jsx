@@ -10,19 +10,19 @@ const shopLinks = [
 ]
 
 const sellerLinks = [
-  { label: "Become a Seller", href: "/seller" },
-  { label: "Seller Guidelines", href: "#" },
+  { label: "Become a Seller", href: "/become-a-seller" },
+  { label: "Seller Guidelines", href: "/seller-guidelines" },
   { label: "Seller Dashboard", href: "/seller/dashboard" },
-  { label: "Seller Support", href: "#" },
+  { label: "Seller Support", href: "/seller-support" },
 ]
 
 const helpLinks = [
-  { label: "About Us", href: "#" },
-  { label: "Contact Us", href: "#" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Track Order", href: "/orders" },
-  { label: "Returns Policy", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
+  { label: "Returns Policy", href: "/returns-policy" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
 ]
 
 export default function Footer() {
