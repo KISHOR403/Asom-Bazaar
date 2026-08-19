@@ -12,7 +12,7 @@ const IMAGE_FALLBACK_MAP = {
   "🧺": "/images/bamboo_lamp.png",
   "🥻": "/images/mekhela_silk_hero.png",
   "🪡": "/images/handwoven_gamosa.png",
-  "🌿": "/images/muga_silk_scarf.png",
+  "🌿": "/images/assam_orthodox_tea.png",
 }
 
 export default function ProductCard({ product }) {

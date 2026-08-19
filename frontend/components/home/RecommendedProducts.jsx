@@ -3,12 +3,12 @@ import Link from "next/link"
 import { Star, Heart } from "lucide-react"
 
 const recommended = [
-  { id: 5, title: "Pat Silk Stole", price: 1899, rating: 4.8, image: "🧣" },
-  { id: 6, title: "Brass Kokal Belt", price: 2200, rating: 4.6, image: "💍" },
-  { id: 7, title: "Muga Chador", price: 8500, rating: 5, image: "🥻" },
-  { id: 8, title: "Cane Magazine Rack", price: 1450, rating: 4.5, image: "🎍" },
-  { id: 9, title: "Assam CTC Tea 500g", price: 499, rating: 4.9, image: "🌿" },
-  { id: 10, title: "Bell Metal Bota", price: 3200, rating: 4.7, image: "🏺" },
+  { id: 9, title: "Organic Assam Orthodox Tea", price: 890, rating: 4.9, image: "/images/assam_orthodox_tea.png" },
+  { id: 10, title: "Karbi Lakadong Turmeric", price: 380, rating: 5.0, image: "/images/karbi_turmeric.png" },
+  { id: 11, title: "Bhut Jolokia Pickle", price: 299, rating: 4.8, image: "/images/bhut_jolokia_pickle.png" },
+  { id: 5, title: "Pat Silk Stole", price: 1899, rating: 4.8, image: "/images/muga_silk_scarf.png" },
+  { id: 6, title: "Brass Jonbiri Necklace", price: 2200, rating: 4.6, image: "/images/jonbiri_necklace.png" },
+  { id: 8, title: "Bamboo Lamp Shade", price: 1450, rating: 4.7, image: "/images/bamboo_lamp.png" },
 ]
 
 export default function RecommendedProducts() {
@@ -26,8 +26,16 @@ export default function RecommendedProducts() {
               key={prod.id}
               className="flex-shrink-0 w-56 bg-ivory rounded-2xl border border-forest-50 overflow-hidden card-3d"
             >
-              <div className="img-zoom aspect-square bg-gradient-to-b from-ivory to-forest-50/20 flex items-center justify-center relative">
-                <span className="text-7xl zoom-target select-none">{prod.image}</span>
+              <div className="img-zoom aspect-square bg-gradient-to-b from-ivory to-forest-50/20 flex items-center justify-center relative overflow-hidden">
+                {prod.image.startsWith("/") ? (
+                  <img
+                    src={prod.image}
+                    alt={prod.title}
+                    className="w-full h-full object-cover zoom-target"
+                  />
+                ) : (
+                  <span className="text-7xl zoom-target select-none">{prod.image}</span>
+                )}
                 <button className="absolute top-3 right-3 h-7 w-7 flex items-center justify-center rounded-full bg-white/70 backdrop-blur text-forest-400 hover:text-rose-500 transition-colors">
                   <Heart className="h-3.5 w-3.5" />
                 </button>
